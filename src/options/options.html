@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hotkey Ecosystem — Options</title>
+    <style>
+      body {
+        font: 14px/1.5 -apple-system, Segoe UI, sans-serif;
+        max-width: 640px;
+        margin: 24px auto;
+        padding: 0 16px;
+        background: #121212;
+        color: #eee;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 14px;
+        margin-top: 28px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 4px;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #aaa;
+      }
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6px 8px;
+        background: #1e1e1e;
+        border: 1px solid #444;
+        border-radius: 4px;
+        color: #eee;
+        font-family: monospace;
+      }
+      .env-triple {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 6px;
+        margin-top: 8px;
+        align-items: center;
+      }
+      button {
+        margin-top: 14px;
+        padding: 6px 14px;
+        background: #3a3a3a;
+        color: #eee;
+        border: 1px solid #555;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #status {
+        margin-left: 10px;
+        color: #8bc48b;
+        font-size: 12px;
+      }
+      .hint {
+        font-size: 12px;
+        color: #888;
+      }
+      a {
+        color: #8ab4f8;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hotkey Ecosystem — Options</h1>
+    <p class="hint">
+      Chrome/Brave only auto-bind the first 4 shortcuts. Configure the rest at
+      <a href="#" id="open-shortcuts-link">chrome://extensions/shortcuts</a> (Firefox: about:addons → gear menu →
+      Manage Extension Shortcuts).
+    </p>
+
+    <h2>Quick-launch workspaces</h2>
+    <label for="gmailUrl">Gmail URL</label>
+    <input id="gmailUrl" type="url" />
+    <label for="githubPrsUrl">GitHub PRs URL</label>
+    <input id="githubPrsUrl" type="url" />
+    <label for="mediaUrl">Media app URL (YouTube/Spotify)</label>
+    <input id="mediaUrl" type="url" />
+    <label for="mediaMatchPattern">Media match pattern</label>
+    <input id="mediaMatchPattern" type="text" placeholder="*://open.spotify.com/*" />
+    <label for="workspaceUrl">Workspace URL (Calendar/Notion)</label>
+    <input id="workspaceUrl" type="url" />
+    <label for="workspaceMatchPattern">Workspace match pattern</label>
+    <input id="workspaceMatchPattern" type="text" placeholder="*://calendar.google.com/*" />
+
+    <h2>Environment switcher</h2>
+    <p class="hint">Host-only triples (no protocol/path), e.g. localhost:3000 / staging.example.com / example.com.</p>
+    <div id="env-triples"></div>
+    <button id="add-triple">+ Add triple</button>
+
+    <div>
+      <button id="save">Save</button>
+      <span id="status"></span>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

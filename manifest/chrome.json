@@ -1,0 +1,6 @@
+{
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["activeTab", "scripting", "storage", "downloads", "clipboardWrite", "tabs", "offscreen"]
+}
