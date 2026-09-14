@@ -1,8 +1,14 @@
 # RSHotkeysEcosystem
 
+![License](https://img.shields.io/badge/license-MIT-blue) ![Manifest](https://img.shields.io/badge/manifest-v3-informational) ![Browsers](https://img.shields.io/badge/browsers-Chrome%20%7C%20Brave%20%7C%20Edge%20%7C%20Firefox-orange)
+
 Turn your browser into a hotkey-driven workstation. One extension, one consistent `Alt+Shift+<letter>` scheme, sixteen commands covering clipboard/text tools, quick-launch workspaces, tab and window management, screenshot capture, and dev-focused utilities like environment switching and cache-bypassing reloads.
 
 Built on Manifest V3 from a single TypeScript codebase, shipping to **Chrome**, **Brave**, **Edge**, and **Firefox** from the same source — Brave and Edge both run the same Chromium build as Chrome.
+
+## Why
+
+Most hotkey extensions either hardcode someone else's workflow or only handle one category (just tabs, just clipboard, just launchers). RSHotkeysEcosystem is one keybinding scheme covering all of it — dev utilities, clipboard/text tools, app launchers, tab/window management, and screenshots — with the launch URLs and environment triples configured per-user from the Options page, not baked into the source.
 
 ## Features
 
@@ -31,19 +37,20 @@ Quick-launch URLs and environment triples are all set from the extension's **Opt
 
 ## Install
 
-Not yet published to any extension store — see [Publishing](#publishing-to-the-stores) below for that. Until then, load it from source:
+- **Chrome / Brave / Edge:** [Chrome Web Store](PASTE_CHROME_WEB_STORE_URL_HERE) — click **Add to Chrome** (works the same in Brave/Edge, same Chromium store)
+- **Firefox:** [Firefox Add-ons](PASTE_FIREFOX_ADDONS_URL_HERE) — click **Add to Firefox**
 
-**Chrome / Brave / Edge**
-1. `npm install && npm run build:chrome`
-2. Go to `chrome://extensions` (`brave://extensions`, `edge://extensions`)
-3. Enable Developer mode
-4. "Load unpacked" → select `dist/chrome`
+Prefer to build it yourself instead of installing from the store? See [Development](#development) below.
 
-**Firefox**
-1. `npm install && npm run build:firefox`
-2. Go to `about:debugging#/runtime/this-firefox`
-3. "Load Temporary Add-on" → select `dist/firefox/manifest.json`
-   (temporary add-ons are removed when Firefox restarts — a persistent install needs a signed `.xpi` from addons.mozilla.org)
+## Usage
+
+Right after installing, do this once — shortcuts aren't fully usable out of the box:
+
+1. **Assign the shortcuts.** Chrome/Brave/Edge only auto-bind the first 4 commands. Open `chrome://extensions/shortcuts` (or click the extension icon → **Configure shortcuts**) and assign a key to the rest. Firefox: `about:addons` → gear icon → **Manage Extension Shortcuts**.
+2. **Set your URLs.** Click the extension icon → **Options**, and fill in your Gmail/GitHub/media/workspace links and your local → staging → production host triples. Nothing works out of the box until these are set.
+3. **Use it.** Highlight text or focus a tab, then press the shortcut — e.g. select some JSON and hit `Alt+Shift+F` to format it, or `Alt+Shift+S` to search it on Stack Overflow and GitHub.
+
+See the [Features](#features) table above for the full command list and what each shortcut does.
 
 ## Development
 
