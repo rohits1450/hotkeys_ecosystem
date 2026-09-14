@@ -1,12 +1,8 @@
-# Hotkey Ecosystem
+# RSHotkeysEcosystem
 
 Turn your browser into a hotkey-driven workstation. One extension, one consistent `Alt+Shift+<letter>` scheme, sixteen commands covering clipboard/text tools, quick-launch workspaces, tab and window management, screenshot capture, and dev-focused utilities like environment switching and cache-bypassing reloads.
 
-Built on Manifest V3 from a single TypeScript codebase, shipping to **Chrome**, **Brave**, and **Firefox** from the same source.
-
-## Why
-
-Command-line and code-editor workflows have had programmable hotkeys for decades. Browsers mostly haven't — every tab switch, search, or format-this-JSON-blob is a mouse trip. Hotkey Ecosystem brings that same muscle-memory-driven workflow to the browser itself, without needing to install and babysit a separate desktop automation tool for browser-only tasks.
+Built on Manifest V3 from a single TypeScript codebase, shipping to **Chrome**, **Brave**, **Edge**, and **Firefox** from the same source — Brave and Edge both run the same Chromium build as Chrome.
 
 ## Features
 
@@ -16,30 +12,30 @@ Command-line and code-editor workflows have had programmable hotkeys for decades
 | `Alt+Shift+S` | Search SO + GitHub | Opens the selected text as a search on Stack Overflow and GitHub Code Search |
 | `Alt+Shift+D` | Search docs | Opens the selected text as an MDN search |
 | `Alt+Shift+G` | Quick-launch Gmail | Focuses an existing Gmail tab, or opens one |
-| — | Quick-launch GitHub PRs | Focuses/opens your GitHub Pull Requests dashboard |
-| — | Quick-launch media | Focuses/opens your music/video app of choice (configurable) |
-| — | Quick-launch workspace | Focuses/opens your calendar/notes app of choice (configurable) |
-| — | Mute/unmute tab | Toggles audio on the active tab |
-| — | Close tabs to the right | Declutters everything after the active tab |
-| — | Pin/unpin tab | Toggles pin state on the active tab |
-| — | Dock reference window | Opens a doc search result in a small window docked beside your current one |
-| — | Capture screenshot | Captures the visible tab straight to your clipboard (downloads as a fallback on Firefox) |
-| — | Copy page as Markdown link | Copies `[Title](URL)` of the current tab |
-| — | Toggle localhost dark mode | Flips a dark-mode filter, scoped to `localhost`/`127.0.0.1` only |
-| — | Switch environment | Cycles the current tab's host through your configured local → staging → production triples |
-| — | Hard refresh (bypass cache) | Reloads the active tab ignoring cache |
+| *set your own¹* | Quick-launch GitHub PRs | Focuses/opens your GitHub Pull Requests dashboard |
+| *set your own¹* | Quick-launch media | Focuses/opens your music/video app of choice (configurable) |
+| *set your own¹* | Quick-launch workspace | Focuses/opens your calendar/notes app of choice (configurable) |
+| *set your own¹* | Mute/unmute tab | Toggles audio on the active tab |
+| *set your own¹* | Close tabs to the right | Declutters everything after the active tab |
+| *set your own¹* | Pin/unpin tab | Toggles pin state on the active tab |
+| *set your own¹* | Dock reference window | Opens a doc search result in a small window docked beside your current one |
+| *set your own¹* | Capture screenshot | Captures the visible tab straight to your clipboard (downloads as a fallback on Firefox) |
+| *set your own¹* | Copy page as Markdown link | Copies `[Title](URL)` of the current tab |
+| *set your own¹* | Toggle localhost dark mode | Flips a dark-mode filter, scoped to `localhost`/`127.0.0.1` only |
+| *set your own¹* | Switch environment | Cycles the current tab's host through your configured local → staging → production triples |
+| *set your own¹* | Hard refresh (bypass cache) | Reloads the active tab ignoring cache |
 
-Only the first four shortcuts above ship with a default keybinding — that's a hard limit Chrome/Brave impose on extensions (`suggested_key` bindings). Bind the rest yourself from the extension popup, one click through to `chrome://extensions/shortcuts` (Firefox: `about:addons` → gear icon → Manage Extension Shortcuts).
+¹ Chrome/Brave/Edge only let an extension auto-bind its **first 4** declared shortcuts (the `suggested_key` mechanism) — that's a store platform limit, not something this extension controls or that publishing changes. All 16 commands are fully implemented and working; the other 12 just need you to pick a key for them once. It's two clicks, not a technical step: open the extension popup → **Configure shortcuts** → assign a key to whichever commands you want. Firefox has no such 4-shortcut cap, but every extension's shortcuts there still need the same one-time manual confirmation at `about:addons` → gear icon → Manage Extension Shortcuts.
 
 Quick-launch URLs and environment triples are all set from the extension's **Options** page — nothing is hardcoded to any one person's tools.
 
 ## Install
 
-Not yet published to any extension store — for now, load it from source:
+Not yet published to any extension store — see [Publishing](#publishing-to-the-stores) below for that. Until then, load it from source:
 
-**Chrome / Brave**
+**Chrome / Brave / Edge**
 1. `npm install && npm run build:chrome`
-2. Go to `chrome://extensions` (or `brave://extensions`)
+2. Go to `chrome://extensions` (`brave://extensions`, `edge://extensions`)
 3. Enable Developer mode
 4. "Load unpacked" → select `dist/chrome`
 
@@ -64,17 +60,6 @@ Source layout: `src/background.ts` routes every command; `src/lib/` holds the br
 
 No content script runs persistently on every page — every DOM-touching command is injected on demand, scoped to the active tab, when its shortcut fires. That keeps the permission list short and the store review straightforward.
 
-## Design notes / known limitations
-
-- **No native app launching.** VS Code/terminal/Postman launchers from the original concept aren't here — browser extensions are sandboxed from the OS. That would need a separate native-messaging companion app, which is a possible future addition, not a v1 feature.
-- **`Alt+Shift+<letter>` over `Ctrl+Shift+<letter>`.** Most of the obvious `Ctrl+Shift+*` combos are already reserved by Chromium/Firefox themselves (DevTools, hard reload, reopen tab, etc.) and can't be captured by an extension.
-- **Windows' language-switch hotkey.** Windows defaults "Switch input language" to `Left Alt+Shift`, which can eat these shortcuts before the browser sees them. That's an OS setting, not something this extension can detect or work around — if shortcuts silently don't fire on Windows, check Settings → Time & Language → Language → Advanced keyboard settings → Input language hot keys.
-
-## Before publishing to a store
-
-- Icons in `icons/` are placeholders — swap in real artwork.
-- `manifest/firefox.json`'s `gecko.id` (`hotkeys-ecosystem@example.invalid`) is a placeholder — replace with an id tied to a domain/email you control before submitting to AMO.
-- Bump `version` in `manifest/base.json` for every store submission.
 
 ## License
 

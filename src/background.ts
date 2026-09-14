@@ -221,7 +221,7 @@ async function handleDockReferenceWindow(tabId: number) {
   });
 }
 
-browser.commands.onCommand.addListener(async (command) => {
+async function dispatchCommand(command: string): Promise<void> {
   const tab = await getActiveTab().catch(() => undefined);
   const tabId = tab?.id;
 
@@ -283,4 +283,6 @@ browser.commands.onCommand.addListener(async (command) => {
       await hardRefreshBypassCache();
       break;
   }
-});
+}
+
+browser.commands.onCommand.addListener(dispatchCommand);

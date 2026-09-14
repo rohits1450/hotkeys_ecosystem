@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Hotkey Ecosystem",
+  "name": "RSHotkeysEcosystem",
   "version": "0.1.0",
   "description": "Turn your browser into a hotkey-driven workstation: clipboard tools, quick-launch workspaces, tab management, and dev utilities.",
   "icons": {
@@ -16,7 +16,10 @@
       "128": "icons/icon128.png"
     }
   },
-  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
   "permissions": ["activeTab", "scripting", "storage", "downloads", "clipboardWrite", "tabs"],
   "commands": {
     "format-selection": {

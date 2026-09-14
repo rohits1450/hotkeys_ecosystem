@@ -1,5 +1,5 @@
 {
-  "name": "hotkeys-ext",
+  "name": "rs-hotkeys-ecosystem",
   "version": "0.1.0",
   "private": true,
   "description": "Cross-browser hotkey ecosystem for dev/clipboard/tab/media workflows.",
@@ -9,13 +9,17 @@
     "build:chrome": "node scripts/build.mjs chrome",
     "build:firefox": "node scripts/build.mjs firefox",
     "dev": "node scripts/build.mjs chrome --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "package": "node scripts/build.mjs --prod && node scripts/package.mjs",
+    "lint:firefox": "web-ext lint --source-dir=dist/firefox"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.270",
     "@types/webextension-polyfill": "^0.10.7",
+    "archiver": "^7.0.1",
     "esbuild": "^0.23.0",
-    "typescript": "^5.5.0"
+    "typescript": "^5.5.0",
+    "web-ext": "^10.6.0"
   },
   "dependencies": {
     "webextension-polyfill": "^0.12.0"

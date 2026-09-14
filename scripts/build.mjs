@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const args = process.argv.slice(2);
 const watch = args.includes("--watch");
+const prod = args.includes("--prod");
 const targets = args.filter((a) => a === "chrome" || a === "firefox");
 const buildTargets = targets.length ? targets : ["chrome", "firefox"];
 
@@ -38,7 +39,8 @@ async function buildTarget(target) {
     bundle: true,
     format: "iife",
     target: "es2022",
-    sourcemap: true,
+    sourcemap: !prod,
+    minify: prod,
     logLevel: "info",
     define: {
       __TARGET__: JSON.stringify(target),
